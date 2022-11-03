@@ -23,10 +23,12 @@ nuovaLavanderia.StatoLavatrici();
 nuovaLavanderia.StatoAsciugatrici();
 nuovaLavanderia.StampaMacchineLavanderia("tutto");
 
+//-----------------------------------------------------------------------------------------------------------------
+
 public class Lavatrice
 {
     public string Nome { get; }
-    public string Programma { get; set; }
+    public ProgrammaLavatrice[] Programmi { get; set; }
     public int Detersivo { get; set; }
     public int Ammorbidente { get; set; }
     public bool Stato { get; set; }
@@ -35,6 +37,11 @@ public class Lavatrice
 
     public Lavatrice(string nome, int detersivo, int ammorbiddente)
     {
+        this.Programmi = new ProgrammaLavatrice[3];
+        this.Programmi[0] = new ProgrammaLavatrice("rinfrescante", 20, 5, 2, 20);
+        this.Programmi[1] = new ProgrammaLavatrice("rinnovante", 40, 10, 3, 40);
+        this.Programmi[2] = new ProgrammaLavatrice("sgrassante", 60, 15, 4, 60);
+
         this.Nome = nome;
         this.Detersivo = detersivo;
         this.Ammorbidente = ammorbiddente;
@@ -44,69 +51,58 @@ public class Lavatrice
 
     public bool AvviaProgramma(string programma)
     {
-        this.Programma = programma;
-
-        if (this.Programma == "rinfrescante")
+        for (int i = 0; i < Programmi.Length; i++)
         {
-            if (this.Detersivo >= 20 && this.Ammorbidente >= 5)
+            if (Programmi[i].Nome == programma)
             {
-                this.Detersivo -= 20;
-                this.Ammorbidente -= 5;
-                this.Stato = true;
-                this.Incasso += (0.50 * 2);
-                this.TempoRimanente = 20;
-                return true;
+                if(this.Detersivo >= Programmi[i].QuantitàDetersivo && this.Ammorbidente >= Programmi[i].QuantitàAmmorbidente)
+                {
+                    this.Stato = true;
+                    this.Incasso += (0.50 * Programmi[i].Costo);
+                    this.TempoRimanente = Programmi[i].Durata;
+                    return true;
+                } 
             }
-
-            this.Programma = null;
-            return false;
-        }
-        else if(this.Programma == "rinnovante")
-        {
-            if (this.Detersivo >= 40 && this.Ammorbidente >= 10)
-            {
-                this.Detersivo -= 40;
-                this.Ammorbidente -= 10;
-                this.Stato = true;
-                this.Incasso += (0.50 * 3);
-                this.TempoRimanente = 40;
-                return true;
-            }
-
-            this.Programma = null;
-            return false;
-        }
-        else if (this.Programma == "sgrassante")
-        {
-            if(this.Detersivo >= 60 && this.Ammorbidente >= 15)
-            {
-                this.Detersivo -= 60;
-                this.Ammorbidente -= 15;
-                this.Stato = true;
-                this.Incasso += (0.50 * 4);
-                this.TempoRimanente = 60;
-                return true;
-            }
-
-            this.Programma = null;
-            return false;
         }
 
-        this.Programma = null;
         return false;
     }
 }
 
+public class ProgrammaLavatrice
+{
+    public string Nome { get; }
+    public int QuantitàDetersivo { get; }
+    public int QuantitàAmmorbidente { get; }
+    public int Costo { get; }
+    public int Durata { get; set; }
+
+    public ProgrammaLavatrice(string nome, int quantitàDetersivo, int quantitàAmmorbidente, int costo, int durata)
+    {
+        this.Nome = nome;
+        this.QuantitàDetersivo = quantitàDetersivo;
+        this.QuantitàAmmorbidente = quantitàAmmorbidente;
+        this.Costo = costo;
+        this.Durata = durata;
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------
+
 public class Asciugatrice
 {
     public string Nome { get; }
-    public string Programma { get; set; }
+    public ProgrammaAsciugatrice[] Programmi { get; set; }
     public bool Stato { get; set; }
     public double Incasso { get; set; }
     public int TempoRimanente { get; set; }
 
     public Asciugatrice(string nome)
     {
+        this.Programmi = new ProgrammaAsciugatrice[2];
+        this.Programmi[0] = new ProgrammaAsciugatrice("rapido", 2, 30);
+        this.Programmi[1] = new ProgrammaAsciugatrice("intensivo", 4, 60);
+
         this.Nome = nome;
         this.Stato = false;
         this.Incasso = 0;
@@ -114,27 +110,36 @@ public class Asciugatrice
 
     public bool AvviaProgramma(string programma)
     {
-        this.Programma = programma;
-
-        if (this.Programma == "rapido")
+        for(int i = 0; i < Programmi.Length; i++)
         {
-            this.Stato = true;
-            this.Incasso += (0.50 * 2);
-            this.TempoRimanente = 30;
-            return true;
+            if (Programmi[i].Nome == programma)
+            {
+                this.Stato = true;
+                this.Incasso += (0.50 * Programmi[i].Costo);
+                this.TempoRimanente = Programmi[i].Durata;
+                return true;
+            }
         }
-        else if (this.Programma == "intensivo")
-        {
-            this.Stato = true;
-            this.Incasso += (0.50 * 4);
-            this.TempoRimanente = 60;
-            return true;
-        }
-
-        this.Programma = null;
+        
         return false;
     }
 }
+
+public class ProgrammaAsciugatrice
+{
+    public string Nome { get; }
+    public int Costo { get; }
+    public int Durata { get; set; }
+
+    public ProgrammaAsciugatrice(string nome, int costo, int durata)
+    {
+        this.Nome = nome;
+        this.Costo = costo;
+        this.Durata = durata;
+    }
+}
+
+//-----------------------------------------------------------------------------------------------------------------
 
 public class Lavanderia
 {
