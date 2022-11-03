@@ -242,7 +242,7 @@ public class Lavanderia
 
         for (int i = 0; i < Lavatrici.Length; i++)
         {
-            int indiceRandom = new Random().Next(0, programmiLavatrici.Length - 1);
+            int indiceRandom = new Random().Next(0, programmiLavatrici.Length);
 
             string programmaCorrente = programmiLavatrici[indiceRandom];
 
@@ -250,17 +250,21 @@ public class Lavanderia
 
             if (statoLavatrice)
             {
+                Console.WriteLine($"lavatrice numero {i + 1}");
                 Console.WriteLine($"programma {Lavatrici[i]}: {programmaCorrente}");
                 Console.WriteLine($"detersivo rimanente: {Lavatrici[i].Detersivo}");
                 Console.WriteLine($"ammorbidente rimanente: {Lavatrici[i].Ammorbidente}");
                 Console.WriteLine("stato: in funzione");
                 Console.WriteLine($"totale incasso: {Lavatrici[i].Incasso}");
-                Console.WriteLine($"tempo rimanente: {Lavatrici[i].TempoRimanente}");
+                Console.WriteLine($"tempo rimanente: {Lavatrici[i].TempoRimanente} min");
+                Console.WriteLine();
             }
             else
             {
+                Console.WriteLine($"lavatrice numero {i + 1}");
                 Console.WriteLine($"programma {Lavatrici[i]}: {programmaCorrente}");
                 Console.WriteLine("stato: non in funzione");
+                Console.WriteLine();
             }
         }
     }
@@ -271,23 +275,27 @@ public class Lavanderia
 
         for (int i = 0; i < Asciugatrici.Length; i++)
         {
-            int indiceRandom = new Random().Next(0, programmiAsciugatrici.Length - 1);
+            int indiceRandom = new Random().Next(0, programmiAsciugatrici.Length);
 
             string programmaCorrente = programmiAsciugatrici[indiceRandom];
 
-            bool statoLavatrice = Asciugatrici[i].AvviaProgramma(programmaCorrente);
+            bool statoAsciugatrice = Asciugatrici[i].AvviaProgramma(programmaCorrente);
 
-            if (statoLavatrice)
+            if (statoAsciugatrice)
             {
+                Console.WriteLine($"asciugatrice numero {i + 1}");
                 Console.WriteLine($"programma {Asciugatrici[i]}: {programmaCorrente}");
                 Console.WriteLine("stato: in funzione");
                 Console.WriteLine($"totale incasso: {Asciugatrici[i].Incasso}");
-                Console.WriteLine($"tempo rimanente: {Asciugatrici[i].TempoRimanente}");
+                Console.WriteLine($"tempo rimanente: {Asciugatrici[i].TempoRimanente} min");
+                Console.WriteLine();
             }
             else
             {
+                Console.WriteLine($"asciugatrice numero {i + 1}");
                 Console.WriteLine($"programma {Asciugatrici[i]}: {programmaCorrente}");
                 Console.WriteLine("stato: non in funzione");
+                Console.WriteLine();
             }
         }
     }
