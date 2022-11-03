@@ -57,6 +57,8 @@ public class Lavatrice
             {
                 if(this.Detersivo >= Programmi[i].QuantitàDetersivo && this.Ammorbidente >= Programmi[i].QuantitàAmmorbidente)
                 {
+                    this.Detersivo -= Programmi[i].QuantitàDetersivo;
+                    this.Ammorbidente -= Programmi[i].QuantitàAmmorbidente;
                     this.Stato = true;
                     this.Incasso += (0.50 * Programmi[i].Costo);
                     this.TempoRimanente = Programmi[i].Durata;
