@@ -19,8 +19,12 @@
 
 Lavanderia nuovaLavanderia = new Lavanderia("Nuova Lavanderia");
 
-nuovaLavanderia.StatoLavatrici();
-nuovaLavanderia.StatoAsciugatrici();
+for(int i = 0; i < 30; i++)
+{
+    nuovaLavanderia.StatoLavatrici();
+    nuovaLavanderia.StatoAsciugatrici();
+}
+
 nuovaLavanderia.StampaMacchineLavanderia("tutto");
 
 //-----------------------------------------------------------------------------------------------------------------
@@ -212,7 +216,7 @@ public class Lavanderia
         }
         else if(scelta == "tutto")
         {
-            Console.WriteLine("------- LAVATRICI -------");
+            Console.WriteLine("------------------------------ LAVATRICI ------------------------------");
             for (int i = 0; i < Lavatrici.Length; i++)
             {
                 Lavatrice lavatriceCorrente = Lavatrici[i];
@@ -222,12 +226,12 @@ public class Lavanderia
                 Console.WriteLine($"quantità detersivo rimanente: {lavatriceCorrente.Detersivo} ml");
                 Console.WriteLine($"quantità ammorbidente rimanente: {lavatriceCorrente.Ammorbidente} ml");
                 Console.WriteLine($"incasso totale lavatrice: {lavatriceCorrente.Incasso} euro");
-                Console.WriteLine("--------------------------------------------------------------");
+                Console.WriteLine("------------------------------------------------------------");
             }
 
             Console.WriteLine();
 
-            Console.WriteLine("------- ASCIUGATRICI -------");
+            Console.WriteLine("------------------------------ ASCIUGATRICI ------------------------------");
             for (int i = 0; i < Asciugatrici.Length; i++)
             {
                 Asciugatrice asciugatriceCorrente = Asciugatrici[i];
@@ -235,7 +239,7 @@ public class Lavanderia
                 Console.WriteLine($"asciugatrice numero {i + 1}");
                 Console.WriteLine($"nome: {asciugatriceCorrente.Nome}");
                 Console.WriteLine($"incasso totale lavatrice: {asciugatriceCorrente.Incasso} euro");
-                Console.WriteLine("--------------------------------------------------------------");
+                Console.WriteLine("------------------------------------------------------------");
             }
         }
         else
@@ -262,14 +266,13 @@ public class Lavanderia
                 Console.WriteLine($"detersivo rimanente: {Lavatrici[i].Detersivo}");
                 Console.WriteLine($"ammorbidente rimanente: {Lavatrici[i].Ammorbidente}");
                 Console.WriteLine("stato: in funzione");
-                Console.WriteLine($"totale incasso: {Lavatrici[i].Incasso}");
+                Console.WriteLine($"totale incasso: {Lavatrici[i].Incasso} euro");
                 Console.WriteLine($"tempo rimanente: {Lavatrici[i].TempoRimanente - new Random().Next(0, Lavatrici[i].TempoRimanente)} min");
                 Console.WriteLine();
             }
             else
             {
                 Console.WriteLine($"lavatrice numero {i + 1}");
-                Console.WriteLine($"programma {Lavatrici[i]}: {programmaCorrente}");
                 Console.WriteLine("stato: non in funzione");
                 Console.WriteLine();
             }
@@ -300,7 +303,6 @@ public class Lavanderia
             else
             {
                 Console.WriteLine($"asciugatrice numero {i + 1}");
-                Console.WriteLine($"programma {Asciugatrici[i]}: {programmaCorrente}");
                 Console.WriteLine("stato: non in funzione");
                 Console.WriteLine();
             }
