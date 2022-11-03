@@ -155,7 +155,7 @@ public class Lavanderia
 
         this.Lavatrici = new Lavatrice[5];
 
-        Lavatrice lavatrice1 = new Lavatrice("lavatrice1", 1000, 500);
+        Lavatrice lavatrice1 = new Lavatrice("lavatrice1", 0, 0);
         Lavatrice lavatrice2 = new Lavatrice("lavatrice2", 1000, 500);
         Lavatrice lavatrice3 = new Lavatrice("lavatrice3", 1000, 500);
         Lavatrice lavatrice4 = new Lavatrice("lavatrice4", 1000, 500);
@@ -263,7 +263,7 @@ public class Lavanderia
                 Console.WriteLine($"ammorbidente rimanente: {Lavatrici[i].Ammorbidente}");
                 Console.WriteLine("stato: in funzione");
                 Console.WriteLine($"totale incasso: {Lavatrici[i].Incasso}");
-                Console.WriteLine($"tempo rimanente: {Lavatrici[i].TempoRimanente} min");
+                Console.WriteLine($"tempo rimanente: {Lavatrici[i].TempoRimanente - new Random().Next(0, Lavatrici[i].TempoRimanente)} min");
                 Console.WriteLine();
             }
             else
@@ -294,7 +294,7 @@ public class Lavanderia
                 Console.WriteLine($"programma {Asciugatrici[i]}: {programmaCorrente}");
                 Console.WriteLine("stato: in funzione");
                 Console.WriteLine($"totale incasso: {Asciugatrici[i].Incasso}");
-                Console.WriteLine($"tempo rimanente: {Asciugatrici[i].TempoRimanente} min");
+                Console.WriteLine($"tempo rimanente: {Asciugatrici[i].TempoRimanente - new Random().Next(0, Asciugatrici[i].TempoRimanente)} min");
                 Console.WriteLine();
             }
             else
